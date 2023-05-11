@@ -1,6 +1,7 @@
+import styles from './Header.module.css'
 
 export function Header(){
     return(
-        <p>Ignite</p>
+        <strong className={styles.header}>Ignite</strong>
     )
 }

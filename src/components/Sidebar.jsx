@@ -21,6 +21,7 @@ export function Sidebar() {
                     Editar seu perfil
                 </a>
             </footer>
+            {console.log('oioioioi')}
         </aside>
     )
 }

@@ -1,10 +1,10 @@
 //import { useState } from 'react'
-import {Post} from "./Post"
-import './styles.css'
-import styles from './App.module.css'
+import {Post} from "./components/Post"
 import { Header } from './components/Header';
 import { Sidebar } from "./components/Sidebar";
 
+import './styles.css'
+import styles from './App.module.css'
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -17,7 +17,6 @@ function App() {
           <Sidebar></Sidebar>
         </aside>
           <main>
-            <Post />
             <Post />
           </main>
         

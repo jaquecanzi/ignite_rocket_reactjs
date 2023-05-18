@@ -6,11 +6,15 @@
     --gray-600:#323238;
     --gray-700:#29292e;
     --gray-900: #121214;
-
+    --green-300: #1aa178;
     --green-500: #00875f;
 
 }
 
+:focus {
+    outline: transparent;
+    box-shadow: 0 0 0 2px var(--green-300);
+}
 
 *{
     margin: 0;

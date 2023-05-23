@@ -7,3 +7,14 @@
     grid-template-columns: 256px 1fr;
     align-items: flex-start;
 }
+
+@media (max-width: 768px) {
+    html {
+        font-size: 86%;
+    }
+
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+

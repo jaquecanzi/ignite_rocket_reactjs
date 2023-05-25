@@ -1,38 +1,73 @@
 import Avatar from './Avatar'
 import { Comment } from './Comment'
 import styles from './Post.module.css'
+import React from 'react'
 
-export function Post() {
+import { format,formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
+export function Post({ author, publishedAt, content }) {
+    const publishedDateFormatted = format(publishedAt,
+        "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBR })
+    const publishedDateeRelativeToNow = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true
+    })
+    const comments = [
+        1,
+        2,
+        3
+    ]
+
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar src= "https://avatars.githubusercontent.com/u/36471319?v=4"/>
+                    <Avatar src={author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>Jaqueline C.</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
-                <time dateTime='11-05-2023'>Publicado há 1 hora</time>
+                <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+                    {publishedDateeRelativeToNow}
+                </time>
             </header>
             <div className={styles.content}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis doloribus ea iure nemo numquam harum quisquam quaerat excepturi, saepe laboriosam amet dolore? Exercitationem ea natus tenetur vero reprehenderit aliquam molestias.
-                <p><a href="#">#loremit #eren #consextur #ghgh</a></p>
+                {content.map((line, index) => {
+                    if (line.type === 'paragraph') {
+                        return (
+                            <React.Fragment key={index}>
+                                <p>{line.content}</p>
+                            </React.Fragment>
+                        );
+                    } else if (line.type === 'link') {
+                        return (
+                            <p key={index}>
+                                <a href="#">{line.content}</a>
+                            </p>
+                        );
+                    }
+                })}
+
+                <p>
+                    <a href="#">#loremit #eren #consextur #ghgh</a>
+                </p>
             </div>
             <form className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
-                <textarea
-                    placeholder='Deixe seu comentário'
-                />
+                <textarea placeholder="Deixe seu comentário" />
                 <footer>
-                    <button type='submit'>Comentar</button>
+                    <button type="submit">Comentar</button>
                 </footer>
             </form>
             <div className={styles.commentList}>
-                <Comment></Comment>
-                <Comment></Comment>
-                <Comment></Comment>
+                {
+                    comments.map(comment, index => {
+                        return <Comment key = {index}/>
+                    })
+                }
             </div>
         </article>
-    )
+    );
 }

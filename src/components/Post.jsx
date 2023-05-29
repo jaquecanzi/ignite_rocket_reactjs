@@ -9,8 +9,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 export function Post({ author, publishedAt, content }) {
     const [comments, setComments] = useState([
-        1,
-        2
+        'Post legal!'
     ])
 
     const publishedDateFormatted = format(publishedAt,
@@ -22,7 +21,10 @@ export function Post({ author, publishedAt, content }) {
 
     function handleCreateNewComment() {
         event.preventDefault()
-        setComments([...comments, comments.length + 1])
+        console.log(event.target.comment.value);
+        const newCommentText = event.target.comment.value
+        setComments([...comments, newCommentText])
+        
     }
 
     return (
@@ -62,7 +64,7 @@ export function Post({ author, publishedAt, content }) {
             </div>
             <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
-                <textarea placeholder="Deixe seu comentário" />
+                <textarea name="comment" placeholder="Deixe seu comentário" />
                 <footer>
                     <button type="submit">Comentar</button>
                 </footer>
@@ -70,7 +72,7 @@ export function Post({ author, publishedAt, content }) {
             <div className={styles.commentList}>
                 {
                     comments.map((comment, index )=> {
-                        return <Comment key = {index}/>
+                        return <Comment key = {index} content={comment}/>
                     })
                 }
             </div>
